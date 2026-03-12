@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Mission 2 - Mise en place de l'infrastructure réseau - Documentation PLC - Arthur R.</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Documentation PLC - Arthur R.</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">Welcome to MkDocs</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../incident/" class="nav-link">Incident</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../infra2/" class="nav-link">Infra2</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">Mission 2 - Mise en place de l'infrastructure réseau</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../plan/" class="nav-link">Plan</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../test/" class="nav-link">Page de test MkDocs</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../wifi/" class="nav-link">Wifi</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../infra2/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../plan/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#mission-2-mise-en-place-de-linfrastructure-reseau" class="nav-link">Mission 2 - Mise en place de l'infrastructure réseau</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#sommaire" class="nav-link">Sommaire</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#1-schema-physique" class="nav-link">1. Schéma physique</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#2-choix-des-vlans-dans-les-switchs" class="nav-link">2. Choix des VLANS dans les switchs</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#3-liaisons-trunk-entre-le-commutateur-central-des-salles-et-le-routeur" class="nav-link">3. Liaisons trunk entre le commutateur central des salles et le routeur</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#4-routage-statique-sur-le-routeur-qui-relie-le-modem-adsl" class="nav-link">4. Routage statique sur le routeur qui relie le modem ADSL</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#5-translation-dadresse-mis-en-place-sur-le-routeur-qui-relie-le-modem-adsl" class="nav-link">5. Translation d'adresse mis en place sur le routeur qui relie le modem ADSL</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#doc-2" class="nav-link">Doc 2</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#mission-3-mise-en-place-de-linfrastructure-reseau-avec-vlan-visiteurs-et-dans-le-vlan-commerciaux" class="nav-link">Mission 3 - Mise en place de l'infrastructure réseau avec VLAN visiteurs et dans le VLAN commerciaux</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#vlan-visiteurs" class="nav-link">VLAN Visiteurs</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="mission-2-mise-en-place-de-linfrastructure-reseau">Mission 2 - Mise en place de l'infrastructure réseau</h1>
+<p><strong>Compte rendu rédigé par :</strong> BIDANESSY Coumba<br />
+<strong>Formation :</strong> BTS SIO 1ère année - Option SISR<br />
+<strong>Établissement :</strong> Lycée Paul-Louis Courier, Tours<br />
+<strong>Date :</strong> 15 janvier 2026</p>
+<h2 id="sommaire">Sommaire</h2>
+<ul>
+<li>
+<ol>
+<li>Schéma physique</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>Choix des VLANS dans les switchs</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>Liaisons trunk entre le commutateur central des salles et le routeur</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>Routage statique sur le routeur qui relie le modem ADSL</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>Translation d'adresse mis en place sur le routeur qui relie le modem ADSL</li>
+</ol>
+</li>
+</ul>
+<h2 id="1-schema-physique">1. Schéma physique</h2>
+<h2 id="2-choix-des-vlans-dans-les-switchs">2. Choix des VLANS dans les switchs</h2>
+<p>Tout d'abord j'ai attribué pour chaque VLAN de chaque salle un ID de VLAN avec l'attribution de chaque port selon leur VLAN adaptée.</p>
+<h2 id="3-liaisons-trunk-entre-le-commutateur-central-des-salles-et-le-routeur">3. Liaisons trunk entre le commutateur central des salles et le routeur</h2>
+<ul>
+<li>Activation du mode trunk sur le commutateur</li>
+<li>Exemple du mode trunk depuis le retour vers le sous réseaux en VLAN 50</li>
+</ul>
+<h2 id="4-routage-statique-sur-le-routeur-qui-relie-le-modem-adsl">4. Routage statique sur le routeur qui relie le modem ADSL</h2>
+<h2 id="5-translation-dadresse-mis-en-place-sur-le-routeur-qui-relie-le-modem-adsl">5. Translation d'adresse mis en place sur le routeur qui relie le modem ADSL</h2>
+<p>```text
+access-list 1 permit 172.40.0.0 0.0.0.255
+access-list 1 permit 172.40.1.0 0.0.0.127
+access-list 1 permit 172.40.1.128 0.0.0.63
+access-list 1 permit 172.40.2.0 0.0.0.63
+access-list 1 permit 172.40.2.64 0.0.0.63</p>
+<p>interface GigabitEthernet0/0.10
+encapsulation dot1Q 10
+ip address 172.40.1.254 255.255.255.128
+ip nat inside</p>
+<p>interface GigabitEthernet0/0.20
+encapsulation dot1Q 20
+ip address 172.40.1.126 255.255.255.128
+ip nat inside</p>
+<p>interface GigabitEthernet0/0.30
+encapsulation dot1Q 30
+ip address 172.40.0.254 255.255.255.0
+ip nat inside</p>
+<p>interface GigabitEthernet0/0.40
+encapsulation dot1Q 40
+ip address 172.40.2.126 255.255.255.192
+ip nat inside</p>
+<p>interface GigabitEthernet0/0.50
+encapsulation dot1Q 50
+ip address 172.40.2.62 255.255.255.192
+ip nat inside</p>
+<p>ip nat inside source list 1 interface g0/1 overload</p>
+<h2 id="doc-2">Doc 2</h2>
+<p>```markdown</p>
+<h1 id="mission-3-mise-en-place-de-linfrastructure-reseau-avec-vlan-visiteurs-et-dans-le-vlan-commerciaux">Mission 3 - Mise en place de l'infrastructure réseau avec VLAN visiteurs et dans le VLAN commerciaux</h1>
+<p><strong>Compte rendu rédigé par :</strong> BIDANESSY Coumba, MANCEAU Léandre, RAHMY Arthur<br />
+<strong>Formation :</strong> BTS SIO 1ère année - Option SISR<br />
+<strong>Établissement :</strong> Lycée Paul-Louis Courier, Tours</p>
+<h2 id="vlan-visiteurs">VLAN Visiteurs</h2>
+<h3 id="calcul-vlsm-wifi-visiteurs">Calcul VLSM WiFi Visiteurs</h3>
+<p>```text
+16 * 1,2 = 20 hôtes
+2^x - 2 = 20 hôtes
+Donc : 2^5 - 2 = 30
+Et 32 - 5 = 27 bits</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
