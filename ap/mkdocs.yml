@@ -1,1 +1,10 @@
 site_name: Documentation PLC - Arthur R.
+theme:
+  name: material
+  language: fr # Met la barre de recherche et l'interface en français
+  palette:
+    primary: indigo # Couleur de la barre supérieure (ex: blue, red, teal...)
+    accent: deep purple # Couleur des liens et boutons
+  features:
+    - navigation.tabs # Crée des onglets de navigation en haut (très pratique)
+    - navigation.top # Ajoute un bouton "Retour en haut de page"
